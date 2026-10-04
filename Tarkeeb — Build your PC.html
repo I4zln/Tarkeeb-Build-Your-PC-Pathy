@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tarkeeb — Build your PC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Young+Serif&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F3F5EE;--sf:#fff;--ink:#1F2A22;--mu:#4B5A4F;--g:#2F5A3F;--og:#fff;--b:#8A2F52;--ln:#D5DBCD;--so:#E4EADB;--am:#7A4F00;--sh:0 1px 2px rgba(31,42,34,.08),0 6px 18px rgba(31,42,34,.06);--se:"Young Serif",Georgia,serif;--sa:"Figtree","IBM Plex Sans Arabic",system-ui,sans-serif;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121B16;--sf:#1B2821;--ink:#E8EFE5;--mu:#B3C1B6;--g:#A6D3A8;--og:#10200F;--b:#F2A9C4;--ln:#2E3F35;--so:#22322A;--am:#F0C46C;--sh:0 1px 2px rgba(0,0,0,.4)}}
+:root[data-theme="dark"]{--bg:#121B16;--sf:#1B2821;--ink:#E8EFE5;--mu:#B3C1B6;--g:#A6D3A8;--og:#10200F;--b:#F2A9C4;--ln:#2E3F35;--so:#22322A;--am:#F0C46C;--sh:0 1px 2px rgba(0,0,0,.4)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(76px + env(safe-area-inset-top,0px))}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.6 var(--sa);-webkit-font-smoothing:antialiased;animation:in .4s ease}
+@keyframes in{from{opacity:0}to{opacity:1}}
+h1,h2,h3{font-family:var(--se);font-weight:400;line-height:1.2;margin:0}
+html[lang=ar] h1,html[lang=ar] h2,html[lang=ar] h3{font-family:var(--sa);font-weight:600}
+h1{font-size:clamp(2.2rem,5.5vw,3.6rem);max-width:16ch}
+h2{font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:6px}
+h3{font-size:1.1rem}
+p{margin:0 0 .8em}
+small,.mu{color:var(--mu)}
+:focus-visible{outline:3px solid var(--b);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:20px}
+header{position:sticky;top:0;z-index:10;background:var(--bg);border-bottom:1px solid var(--ln);padding-top:env(safe-area-inset-top,0px)}
+header .wrap{display:flex;align-items:center;gap:12px;flex-wrap:wrap;min-height:64px}
+.logo{font-family:var(--se);font-size:1.3rem;color:var(--ink);text-decoration:none;margin-inline-end:auto}
+nav{display:flex;gap:2px;flex-wrap:wrap}
+nav a{color:var(--ink);text-decoration:none;padding:10px;border-radius:8px;font-weight:500}
+nav a:hover{background:var(--so)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:46px;padding:0 20px;border-radius:10px;border:2px solid var(--g);background:var(--g);color:var(--og);font:600 1rem var(--sa);text-decoration:none;cursor:pointer;transition:transform .15s,filter .15s}
+.btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.btn.ghost{background:transparent;color:var(--g)}
+.btn.sm{min-height:40px;padding:0 14px;border-radius:8px}
+.btn[aria-disabled=true]{opacity:.5;pointer-events:none}
+.badge{min-width:22px;padding:0 6px;border-radius:999px;background:var(--b);color:var(--og);font-size:.85rem;line-height:22px;text-align:center}
+section{padding:60px 0}
+.hero{padding:48px 0}
+.hg{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
+.hero p.lead{font-size:1.15rem;color:var(--mu);max-width:52ch;margin:16px 0 22px}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+.chain{list-style:none;display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:26px 0 0}
+.chain li{padding:6px 12px;border:1px solid var(--ln);border-radius:999px;font-size:.9rem;background:var(--sf)}
+.chain li:not(:last-child)::after{content:"›";margin-inline-start:10px;color:var(--mu)}
+svg{display:block;width:100%;height:auto}
+.hero svg{max-width:300px;margin-inline:auto}
+.cols{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:start;margin-top:22px}
+.slot{padding:12px 0;border-bottom:1px solid var(--ln)}
+.slot label{display:flex;flex-direction:column;margin-bottom:6px}
+.slot small{font-size:.9rem}
+select,input[type=search]{width:100%;min-height:46px;padding:8px 12px;border:1.5px solid var(--mu);border-radius:10px;background:var(--bg);color:var(--ink);font:400 1rem var(--sa)}
+.card{background:var(--sf);border:1px solid var(--ln);border-radius:16px;padding:20px;box-shadow:var(--sh)}
+.side{position:sticky;top:84px;display:grid;gap:14px}
+.side svg{max-width:210px;margin-inline:auto}
+.kv{display:flex;justify-content:space-between;gap:10px;font-weight:600}
+.st{display:inline-flex;align-items:center;gap:6px;padding:2px 10px 2px 8px;border-radius:999px;border:1.5px solid currentColor;font-size:.85rem;font-weight:600;white-space:nowrap;animation:pop .25s ease}
+@keyframes pop{from{transform:scale(.92);opacity:.4}}
+.st i{font-style:normal}
+.ok{color:var(--g)}.warn{color:var(--am)}.bad{color:var(--b)}.na{color:var(--mu)}
+.list{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:10px}
+.list li{display:flex;gap:12px;align-items:flex-start;justify-content:space-between}
+.list li>div{display:flex;flex-direction:column;flex:1}
+.list li>.st{order:2}
+.ups li{background:var(--so);border-radius:12px;padding:12px 14px;align-items:center}
+.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-top:20px}
+.cc{display:flex;flex-direction:column;gap:4px;text-align:start;padding:14px;background:var(--sf);border:1px solid var(--ln);border-radius:16px;color:var(--ink);font:inherit;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.cc:hover{transform:translateY(-3px);box-shadow:var(--sh)}
+.cc .th svg{max-width:120px;margin-inline:auto}
+.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:18px 0;align-items:end}
+.filters label{display:flex;flex-direction:column;gap:4px;font-weight:600;font-size:.92rem}
+.filters .chk{flex-direction:row;align-items:center;min-height:46px}
+.chk input{width:22px;height:22px;accent-color:var(--g)}
+input[type=range]{accent-color:var(--g);min-height:46px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+.pc{background:var(--sf);border:1px solid var(--ln);border-radius:16px;box-shadow:var(--sh);overflow:hidden;display:flex;flex-direction:column;transition:transform .2s}
+.pc:hover{transform:translateY(-3px)}
+.th{background:var(--so);padding:12px}
+.th svg{max-width:130px;margin-inline:auto}
+.bd{padding:16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.tg{display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:.9rem;margin:0}
+.lv{color:var(--b)}
+.lk{all:unset;cursor:pointer;font-family:var(--se);font-size:1.1rem;line-height:1.25}
+html[lang=ar] .lk{font-family:var(--sa);font-weight:600}
+.lk:hover{text-decoration:underline}
+.lk:focus-visible{outline:3px solid var(--b);outline-offset:2px}
+dl.sp{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;margin:6px 0}
+dl.sp div{display:flex;flex-direction:column}
+dt{font-size:.8rem;color:var(--mu)}dd{margin:0;font-weight:600;font-size:.95rem}
+.cp{display:flex;flex-direction:column;align-items:flex-start;gap:2px;margin:0}
+.pr{font-weight:600;font-size:1.2rem;margin-top:auto}
+.ac{display:flex;gap:8px;flex-wrap:wrap}
+.lg{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:20px}
+.an{display:grid;grid-template-columns:.8fr 1.2fr;gap:32px;align-items:start;margin-top:20px}
+.an svg{max-width:300px;margin-inline:auto}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.chips button{min-height:42px;padding:0 14px;border-radius:999px;border:1.5px solid var(--ln);background:var(--sf);color:var(--ink);font:500 .95rem var(--sa);cursor:pointer}
+.chips button[aria-pressed=true]{border-color:var(--g);background:var(--so);font-weight:600}
+dialog{border:0;border-radius:18px;padding:0;width:min(860px,calc(100% - 24px));max-height:calc(100dvh - 24px);background:var(--bg);color:var(--ink);box-shadow:var(--sh);animation:in .25s}
+dialog::backdrop{background:rgba(10,16,12,.55)}
+.box{padding:24px}
+#cart{margin:0;inset-inline:auto 0;height:100dvh;max-height:none;width:min(420px,100%);border-radius:0;padding-top:env(safe-area-inset-top,0px)}
+.dg{display:grid;grid-template-columns:.7fr 1.3fr;gap:24px;align-items:center;margin-bottom:12px}
+.dg svg{max-width:220px;margin-inline:auto}
+dl.sp.big{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+dl.sp.big div{background:var(--sf);border:1px solid var(--ln);border-radius:10px;padding:10px 12px}
+.dx{float:inline-end}
+.cl{display:grid;grid-template-columns:1fr auto auto;gap:6px 12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--ln)}
+.cl>div:first-child{display:flex;flex-direction:column}
+.step{display:flex;align-items:center;gap:6px}
+.step button{width:38px;height:38px;border-radius:8px;border:1.5px solid var(--ln);background:var(--sf);color:var(--ink);font-size:1.1rem;cursor:pointer}
+.rm{grid-column:1/-1;justify-self:start;background:none;border:0;color:var(--b);font:600 .9rem var(--sa);text-decoration:underline;cursor:pointer;min-height:34px;padding:0}
+.sr{position:absolute;left:-9999px}
+footer{padding:30px 0;border-top:1px solid var(--ln);color:var(--mu);font-size:.92rem}
+@media (max-width:800px){.hg,.cols,.an,.dg{grid-template-columns:1fr}.side{position:static}section{padding:44px 0}.hero svg{max-width:200px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+ <a class="logo" href="#top">Tarkeeb <span lang="ar">تركيب</span></a>
+ <nav aria-label="Main"><a href="#builder" data-i>Builder</a><a href="#shop" data-i>Shop</a><a href="#anatomy" data-i>Where parts go</a><a href="#levels" data-i>Levels</a></nav>
+ <button class="btn sm ghost" id="lg" type="button" lang="ar">العربية</button>
+ <button class="btn sm ghost" id="cartBtn" type="button"><span data-i>Cart</span><span class="badge" id="cn">0</span></button>
+</div></header>
+<p class="sr" id="live" role="status"></p>
+<main id="top">
+<section class="hero"><div class="wrap hg">
+ <div>
+  <h1 data-i>Build your PC. Understand your hardware. Choose compatible parts.</h1>
+  <p class="lead" data-i>Every part tells you who makes it, where it goes, what it fits with, how strong it is and what to upgrade next.</p>
+  <div class="row"><a class="btn" href="#builder" data-i>Start your build</a><a class="btn ghost" href="#shop" data-i>Browse parts</a></div>
+  <ol class="chain"><li data-i>What it is</li><li data-i>Who makes it</li><li data-i>Where it goes</li><li data-i>What it fits</li><li data-i>How strong</li><li data-i>What to upgrade</li></ol>
+ </div>
+ <div id="heroArt"></div>
+</div></section>
+
+<section id="builder" style="padding-top:20px"><div class="wrap">
+ <h2 data-i>PC Builder</h2>
+ <p class="mu" data-i>Pick one part per slot. Compatibility is checked as you go.</p>
+ <div class="cols">
+  <div class="card" id="slots"></div>
+  <div class="side">
+   <div class="card">
+    <div id="dia"></div>
+    <div class="kv" style="margin-top:12px"><span data-i>Compatibility check</span><span id="ov"></span></div>
+    <div class="kv"><span data-i>Estimated power</span><span id="pw"></span></div>
+    <div class="kv"><span data-i>Total</span><span id="tot"></span></div>
+    <button class="btn" id="addAll" type="button" style="margin-top:12px;width:100%" data-i>Add build to cart</button>
+   </div>
+  </div>
+ </div>
+ <div class="cols" style="margin-top:20px">
+  <div class="card"><h3 data-i>Compatibility check</h3><ul class="list" id="checks"></ul></div>
+  <div class="card"><h3 data-i>Recommended Upgrades</h3><ul class="list ups" id="ups"></ul></div>
+ </div>
+</div></section>
+
+<section id="cats" style="padding-top:20px"><div class="wrap">
+ <h2 data-i>Browse by part</h2>
+ <div class="cg" id="catGrid"></div>
+</div></section>
+
+<section id="shop"><div class="wrap">
+ <h2 data-i>Shop</h2>
+ <div class="filters" id="filters">
+  <label><span data-i>Search</span><input id="fq" type="search"></label>
+  <label><span data-i>Part</span><select id="fc"></select></label>
+  <label><span data-i>Brand</span><select id="fb"></select></label>
+  <label><span data-i>Level</span><select id="fl"></select></label>
+  <label><span data-i>Specs</span><select id="fs"></select></label>
+  <label><span><span data-i>Max price</span>: <output id="fo"></output></span><input id="fp" type="range" min="0" step="50" max="9000"></label>
+  <label class="chk"><input id="ff" type="checkbox"><span data-i>Fits my build</span></label>
+ </div>
+ <p class="mu" id="count" aria-live="polite"></p>
+ <div class="grid" id="grid"></div>
+</div></section>
+
+<section id="anatomy"><div class="wrap">
+ <h2 data-i>Where parts go</h2>
+ <div class="an"><div id="ad"></div><div><div class="chips" id="anChips"></div><div class="card" id="at"></div></div></div>
+</div></section>
+
+<section id="levels"><div class="wrap">
+ <h2 data-i>Performance levels</h2>
+ <div class="lg" id="lvGrid"></div>
+</div></section>
+</main>
+<footer><div class="wrap">Sample catalog: models, specifications and prices are illustrative and not live stock. Majesty case models are placeholders.</div></footer>
+
+<dialog id="dlg" aria-labelledby="dt"><div class="box"><button class="btn sm ghost dx" id="dx" type="button" data-i>Close</button><div id="dbody"></div></div></dialog>
+<dialog id="cart" aria-labelledby="ctt"><div class="box">
+ <button class="btn sm ghost dx" id="cx" type="button" data-i>Close</button>
+ <h3 id="ctt" data-i>Your cart</h3>
+ <ul class="list" id="cl"></ul>
+ <div class="kv" style="margin:16px 0"><span data-i>Total</span><span id="ct"></span></div>
+ <a class="btn" id="mail" href="#" style="width:100%" data-i>Checkout by email</a>
+</div></dialog>
+
+<script>
+var lang="en",$=function(i){return document.getElementById(i)},
+AR={"Builder":"المُركّب","Shop":"المتجر","Where parts go":"أين تُركَّب القطع","Levels":"المستويات","Cart":"السلة","Your cart":"سلتك","Close":"إغلاق","Remove":"إزالة",
+"Build your PC. Understand your hardware. Choose compatible parts.":"ركّب جهازك. افهم قطعك. اختر قطعاً متوافقة.",
+"Every part tells you who makes it, where it goes, what it fits with, how strong it is and what to upgrade next.":"كل قطعة تخبرك من يصنعها، وأين تُركَّب، وما يتوافق معها، ومدى قوتها، وما الذي تُرقّيه بعدها.",
+"Start your build":"ابدأ التركيب","Browse parts":"تصفّح القطع","What it is":"ما هي","Who makes it":"من يصنعها","Where it goes":"أين تُركَّب","What it fits":"مع ماذا تتوافق","How strong":"مدى قوتها","What to upgrade":"ما تُرقّيه",
+"PC Builder":"مُركّب الجهاز","Pick one part per slot. Compatibility is checked as you go.":"اختر قطعة لكل خانة. يُفحص التوافق تلقائياً.",
+"Compatibility check":"فحص التوافق","Estimated power":"الطاقة المقدّرة","Total":"المجموع","Add build to cart":"أضف التركيبة للسلة","Recommended Upgrades":"ترقيات مقترحة",
+"Browse by part":"تصفّح حسب القطعة","Performance levels":"مستويات الأداء","Search":"بحث","Part":"القطعة","Brand":"الشركة","Level":"المستوى","Specs":"المواصفات","Max price":"أعلى سعر","Fits my build":"يناسب تركيبتي",
+"All":"الكل","parts":"قطعة","Compatible":"متوافق","Warning":"تحذير","Not compatible":"غير متوافق","Not checked":"لم يُفحص",
+"Add to Build":"أضف للتركيبة","Add to Cart":"أضف للسلة","Added to build":"أُضيف للتركيبة","Added to cart":"أُضيف للسلة","Choose…":"اختر…","Goes in":"مكانها",
+"Entry":"مبتدئ","Mid-range":"متوسط","High-end":"عالٍ","Enthusiast":"احترافي","Your cart is empty.":"سلتك فارغة.","Checkout by email":"إتمام الطلب بالبريد","No parts match. Try removing a filter.":"لا توجد قطع مطابقة. جرّب إزالة فلتر.",
+"Specifications":"المواصفات","Compatible with":"متوافق مع","Alternatives":"بدائل","Browse":"تصفّح","Pick a CPU and a motherboard to start checking.":"اختر معالجاً ولوحة أم لبدء الفحص.","Choose parts to see upgrade ideas.":"اختر قطعاً لتظهر اقتراحات الترقية.",
+"CPU":"المعالج","Graphics card":"كرت الشاشة","Motherboard":"اللوحة الأم","RAM":"الذاكرة","M.2 SSD":"قرص M.2","Power supply":"مزود الطاقة","CPU cooler":"مبرّد المعالج","PC case":"صندوق الجهاز",
+"Motherboard CPU socket":"سوكت المعالج في اللوحة الأم","PCIe x16 slot":"منفذ PCIe x16","Main motherboard tray inside the case":"قاعدة اللوحة الأم داخل الصندوق","DIMM slots on the motherboard":"منافذ الذاكرة في اللوحة الأم","M.2 slot on the motherboard":"منفذ M.2 في اللوحة الأم","PSU compartment of the PC case":"حجرة مزود الطاقة في الصندوق","Mounted directly above the CPU":"يُثبَّت مباشرة فوق المعالج","Main PC chassis containing all components":"هيكل الجهاز الذي يحتوي كل القطع",
+"Socket":"السوكت","Memory type":"نوع الذاكرة","Size / capacity":"السعة","PSU wattage":"استطاعة المزود","GPU maker":"صانع المعالج الرسومي","Form factor":"المقاس"},
+T=function(s){return lang=="ar"&&AR[s]||s},
+sar=function(n){return lang=="ar"?n.toLocaleString("en-US")+" ر.س":"SAR "+n.toLocaleString("en-US")},
+CATS=["cpu","gpu","mb","ram","ssd","psu","cool","case"],
+CN={cpu:"CPU",gpu:"Graphics card",mb:"Motherboard",ram:"RAM",ssd:"M.2 SSD",psu:"Power supply",cool:"CPU cooler",case:"PC case"},
+LV=["Entry","Mid-range","High-end","Enthusiast"],
+LD=["1080p esports, office and everyday use.","Smooth 1080p and 1440p gaming.","High-refresh 1440p, 4K and content creation.","Maximum 4K, streaming and workstation loads."],
+WH={cpu:"Motherboard CPU socket",gpu:"PCIe x16 slot",mb:"Main motherboard tray inside the case",ram:"DIMM slots on the motherboard",ssd:"M.2 slot on the motherboard",psu:"PSU compartment of the PC case",cool:"Mounted directly above the CPU",case:"Main PC chassis containing all components"},
+WHAT={cpu:"The processor. It runs programs and does the calculations.",gpu:"The graphics card. It draws games, video and 3D.",mb:"The main circuit board. Every other part connects to it.",ram:"Short-term memory for open programs and games.",ssd:"Fast storage for Windows, apps and games.",psu:"Turns wall power into steady power for every part.",cool:"Pulls heat away from the CPU so it can run fast.",case:"The shell that holds, protects and cools the parts."},
+REL={cpu:["mb","cool"],mb:["cpu","ram","case"],gpu:["case"],ram:["mb"],cool:["cpu","case"],case:["mb","gpu","cool"]},
+NT={ssd:"Fits any M.2 2280 slot. PCIe 5.0 drives run at PCIe 4.0 speed on boards without Gen5.",psu:"Fits any ATX case. Check the wattage against your parts in the builder."},
+SC={cpu:"sock cores w",gpu:"chip vram w len",mb:"sock ddr form",ram:"ddr cap spd cl kit",ssd:"cap gen rd wr",psu:"w rate mod atx",cool:"type socks rad h",case:"forms gpuMax coolMax rad fans"},
+R=[
+["cpu","Intel","Core i5-12400F",0,480,"LGA1700","6C/12T",65],
+["cpu","Intel","Core i7-14700K",2,1650,"LGA1700","20C/28T",125],
+["cpu","Intel","Core i9-14900K",3,2200,"LGA1700","24C/32T",125],
+["cpu","Intel","Core Ultra 7 265K",2,1500,"LGA1851","20C/20T",125],
+["cpu","AMD","Ryzen 5 7600",1,650,"AM5","6C/12T",65],
+["cpu","AMD","Ryzen 7 7800X3D",2,1550,"AM5","8C/16T",120],
+["cpu","AMD","Ryzen 9 7950X",3,2300,"AM5","16C/32T",170],
+["gpu","ASUS","Dual GeForce RTX 4060",0,1150,"NVIDIA",8,115,227],
+["gpu","MSI","GeForce RTX 4070 SUPER Ventus 2X",1,2550,"NVIDIA",12,220,242],
+["gpu","Gigabyte","GeForce RTX 4090 Gaming OC",3,8200,"NVIDIA",24,450,340],
+["gpu","Sapphire","Pulse Radeon RX 7600",0,1050,"AMD Radeon",8,165,240],
+["gpu","Sapphire","Pulse Radeon RX 7800 XT",1,2150,"AMD Radeon",16,263,280],
+["gpu","ASUS","TUF Radeon RX 7900 XTX",2,3800,"AMD Radeon",24,355,350],
+["mb","ASRock","B660M Pro RS",0,430,"LGA1700","DDR4","mATX"],
+["mb","Gigabyte","Z790 AORUS Elite",2,1100,"LGA1700","DDR5","ATX"],
+["mb","ASUS","ROG Strix Z890-E",3,2400,"LGA1851","DDR5","ATX"],
+["mb","ASRock","B650M Pro RS",0,560,"AM5","DDR5","mATX"],
+["mb","MSI","MAG B650 Tomahawk WiFi",1,820,"AM5","DDR5","ATX"],
+["mb","Gigabyte","B650I Aorus Ultra",2,1250,"AM5","DDR5","ITX"],
+["ram","Kingston","FURY Beast DDR4 16GB",0,180,"DDR4",16,3200,16,"2×8GB"],
+["ram","Corsair","Vengeance DDR5 32GB",1,420,"DDR5",32,5600,36,"2×16GB"],
+["ram","G.Skill","Trident Z5 DDR5 32GB",2,560,"DDR5",32,6000,30,"2×16GB"],
+["ram","G.Skill","Trident Z5 RGB DDR5 64GB",3,1300,"DDR5",64,6400,32,"2×32GB"],
+["ssd","Crucial","P3 500GB",0,150,500,"PCIe 3.0",3500,1900],
+["ssd","Kingston","NV2 1TB",0,230,1000,"PCIe 4.0",3500,2800],
+["ssd","WD","Black SN770 1TB",1,330,1000,"PCIe 4.0",5150,4900],
+["ssd","Samsung","990 PRO 2TB",2,800,2000,"PCIe 4.0",7450,6900],
+["ssd","Crucial","T705 2TB",3,1400,2000,"PCIe 5.0",14500,12700],
+["psu","Corsair","CV550 550W",0,230,550,"Bronze","Non-modular","ATX 2.4"],
+["psu","ASUS","TUF Gaming 750B 750W",1,420,750,"Bronze","Semi-modular","ATX 2.4"],
+["psu","Seasonic","Focus GX-850 850W",2,640,850,"Gold","Fully modular","ATX 3.0"],
+["psu","ASUS","ROG Thor 1200P2 1200W",3,1450,1200,"Platinum","Fully modular","ATX 3.0"],
+["cool","DeepCool","AK400",0,90,"Air","LGA1700 LGA1851 AM5",0,155],
+["cool","ARCTIC","Freezer 36",2,160,"Air","LGA1700 LGA1851 AM5",0,159],
+["cool","Cooler Master","MasterLiquid 240 Core ARGB",1,300,"AIO","LGA1700 LGA1851 AM5",240,0],
+["cool","ARCTIC","Liquid Freezer III 360",3,480,"AIO","LGA1700 LGA1851 AM5",360,0],
+["case","Majesty","Najd (Micro-ATX)",0,230,["mATX","ITX"],300,155,240,2],
+["case","Majesty","Rimal (ATX Mid Tower)",0,260,["ATX","mATX","ITX"],330,160,240,3],
+["case","Majesty","Falcon (ATX Mid Tower)",1,480,["ATX","mATX","ITX"],370,170,360,4],
+["case","Majesty","Dune (Mini-ITX)",2,700,["ITX"],320,60,240,2],
+["case","Majesty","Oryx (Full Tower)",3,950,["ATX","mATX","ITX"],420,185,420,6]],
+P=R.map(function(r,i){var o={id:i,c:r[0],b:r[1],n:r[2],l:r[3],p:r[4]};SC[r[0]].split(" ").forEach(function(k,j){o[k]=r[5+j]});return o}),
+SP={cpu:function(p){return[["Socket",p.sock],["Cores / threads",p.cores],["TDP",p.w+"W"]]},
+gpu:function(p){return[["Maker",p.chip],["Memory",p.vram+"GB"],["Board power",p.w+"W"],["Length",p.len+"mm"]]},
+mb:function(p){return[["Socket",p.sock],["Memory",p.ddr],["Form factor",p.form]]},
+ram:function(p){return[["Type",p.ddr],["Capacity",p.cap+"GB ("+p.kit+")"],["Speed",p.spd+" MT/s"],["Latency","CL"+p.cl]]},
+ssd:function(p){return[["Capacity",p.cap>=1000?p.cap/1000+"TB":p.cap+"GB"],["Interface",p.gen],["Read / write",p.rd+" / "+p.wr+" MB/s"],["Form factor","M.2 2280"]]},
+psu:function(p){return[["Wattage",p.w+"W"],["Efficiency","80 PLUS "+p.rate],["Cabling",p.mod],["Standard",p.atx]]},
+cool:function(p){return[["Type",p.type],["Sockets",p.socks],["Radiator",p.rad?p.rad+"mm":"None"],["Height",p.h?p.h+"mm":"—"]]},
+case:function(p){return[["Boards",p.forms.join(" / ")],["GPU clearance",p.gpuMax+"mm"],["Cooler clearance",p.coolMax+"mm"],["Radiator",p.rad+"mm"],["Fans included",p.fans]]}},
+G=[["Socket",function(p){return p.sock}],["Memory type",function(p){return p.ddr}],["Size / capacity",function(p){return p.cap&&(p.cap>=1000?p.cap/1000+"TB":p.cap+"GB")}],["PSU wattage",function(p){return p.c=="psu"&&p.w+"W"}],["GPU maker",function(p){return p.chip}],["Form factor",function(p){return p.form||p.forms}]],
+BR=P.map(function(p){return p.b}).filter(function(v,i,a){return a.indexOf(v)==i}).sort(),
+MAX=Math.max.apply(null,P.map(function(p){return p.p})),
+SL={ok:"Compatible",warn:"Warning",bad:"Not compatible",na:"Not checked"},IC={ok:"✓",warn:"!",bad:"✕",na:"–"},
+B={},C={},A="cpu",F0=function(){return{q:"",c:"",b:"",l:"",s:"",max:MAX,fit:false}},F=F0();
+
+function st(s,t){return '<span class="st '+s+'"><i aria-hidden="true">'+IC[s]+'</i>'+t+'</span>'}
+function dia(h,s,l,big){l=l||0;
+ var f=function(c){return h.has(c)?"var(--b)":s.has(c)?"var(--g)":"var(--sf)"},
+ k=function(c){return h.has(c)||s.has(c)?"var(--og)":"var(--ink)"},
+ t=function(c,x,y,w,on){return big?'<text x="'+x+'" y="'+y+'" text-anchor="middle" font-size="10" font-weight="600" stroke="none" fill="'+k(on||c)+'">'+w+'</text>':""},
+ hc=h.has("case"),
+ o='<svg viewBox="0 0 240 300" role="img" aria-label="PC case diagram" stroke="var(--ink)" stroke-width="1.5"><rect x="8" y="8" width="224" height="284" rx="16" fill="'+(hc?"var(--so)":"var(--bg)")+'" stroke="'+(hc?"var(--b)":"var(--ink)")+'" stroke-width="'+(hc?6:2)+'"/>';
+ o+='<rect x="26" y="26" width="154" height="196" rx="8" fill="'+f("mb")+'"/>'+t("mb",103,214,"Motherboard");
+ o+='<circle cx="86" cy="76" r="30" fill="'+(h.has("cool")?"var(--b)":s.has("cool")?"var(--g)":"none")+'" stroke-dasharray="4 3"/>'+t("cool",86,120,"Cooler","mb");
+ o+='<rect x="68" y="58" width="36" height="36" rx="5" fill="'+f("cpu")+'"/>'+t("cpu",86,80,"CPU");
+ for(var i=0;i<(l<1?2:4);i++)o+='<rect x="'+(124+i*13)+'" y="44" width="9" height="76" rx="2" fill="'+f("ram")+'"/>';
+ o+=t("ram",150,136,"RAM","mb");
+ o+='<rect x="40" y="130" width="60" height="14" rx="3" fill="'+f("ssd")+'"/>'+t("ssd",70,140,"M.2");
+ o+='<rect x="34" y="158" width="138" height="'+(20+l*6)+'" rx="4" fill="'+f("gpu")+'"/>'+t("gpu",103,173,"GPU");
+ o+='<rect x="24" y="240" width="192" height="40" rx="6" fill="'+f("psu")+'"/>'+t("psu",120,264,"PSU");
+ for(i=0;i<Math.min(l+1,4);i++)o+='<circle cx="206" cy="'+(50+i*48)+'" r="14" fill="none"/>';
+ return o+'</svg>'}
+
+function chk(b){var o=[],a=function(k,s,t,c){o.push({k:k,s:s,t:t,c:c})},cpu=b.cpu,mb=b.mb,gpu=b.gpu,ram=b.ram,psu=b.psu,co=b.cool,cs=b.case;
+ if(cpu&&mb)cpu.sock==mb.sock?a("CPU + Motherboard","ok","Both use the "+mb.sock+" socket.","cpu mb"):a("CPU + Motherboard","bad",cpu.n+" needs "+cpu.sock+", but this board is "+mb.sock+".","cpu mb");
+ if(ram&&mb)ram.ddr==mb.ddr?a("RAM + Motherboard","ok",ram.ddr+" matches the board.","ram mb"):a("RAM + Motherboard","bad","This motherboard supports "+mb.ddr+", not "+ram.ddr+".","ram mb");
+ if(mb&&cs)cs.forms.indexOf(mb.form)>=0?a("Motherboard + Case","ok",mb.form+" board fits this case.","mb case"):a("Motherboard + Case","bad",cs.n+" cannot hold a "+mb.form+" board.","mb case");
+ if(gpu&&cs){var d=cs.gpuMax-gpu.len;d<0?a("GPU + Case","bad","The card is "+gpu.len+"mm long; the case allows "+cs.gpuMax+"mm.","gpu case"):d<15?a("GPU + Case","warn","Tight fit: only "+d+"mm to spare.","gpu case"):a("GPU + Case","ok",d+"mm of GPU clearance to spare.","gpu case")}
+ if(co&&cpu)co.socks.indexOf(cpu.sock)>=0?a("Cooler + CPU","ok","Mounting kit supports "+cpu.sock+".","cool cpu"):a("Cooler + CPU","bad","This cooler does not list "+cpu.sock+" support.","cool cpu");
+ if(co&&cs){var air=co.type=="Air",f=air?co.h<=cs.coolMax:co.rad<=cs.rad;f?a("Cooler + Case","ok",air?"Cooler height fits.":co.rad+"mm radiator fits.","cool case"):a("Cooler + Case","bad",air?"Cooler is "+co.h+"mm tall; the case allows "+cs.coolMax+"mm.":"Case supports radiators up to "+cs.rad+"mm.","cool case")}
+ if(psu&&(cpu||gpu)){var n=(cpu?cpu.w:0)+(gpu?gpu.w:0)+100;psu.w>=n*1.3?a("PSU wattage","ok","About "+n+"W needed; "+psu.w+"W gives plenty of headroom.","psu cpu gpu"):psu.w>=n?a("PSU wattage","warn","About "+n+"W needed; "+psu.w+"W leaves little headroom.","psu cpu gpu"):a("PSU wattage","bad","About "+n+"W needed, but this PSU is "+psu.w+"W.","psu cpu gpu")}
+ return o}
+
+function ups(b){var u=[],a=function(t,w,c){u.push({t:t,w:w,c:c})};
+ chk(b).forEach(function(x){
+  if(x.s=="bad")a(x.k=="RAM + Motherboard"?"Your motherboard does not support this RAM configuration.":"Fix: "+x.k,x.t,x.c.split(" ")[0]);
+  if(x.k=="PSU wattage"&&x.s=="warn")a("Your PSU has limited headroom. Consider a higher wattage PSU.","PSUs run quietest and most efficiently below about 75% load, and spare headroom lets you add a stronger GPU later.","psu");
+  if(x.k=="GPU + Case"&&x.s=="warn")a("Check airflow around your GPU.","A few millimetres of clearance can block front fans and trap heat.","case")});
+ if(b.gpu&&b.cpu&&b.gpu.l<b.cpu.l)a("Upgrade your GPU for better gaming performance.","Your "+b.cpu.n+" is "+LV[b.cpu.l]+" class, but the "+b.gpu.n+" is "+LV[b.gpu.l]+". The GPU sets the frame rate in most games.","gpu");
+ if(b.ssd&&b.ssd.cap<1000)a("Consider a larger M.2 SSD.","500GB fills up fast once you install a few modern games, which often need 100GB each.","ssd");
+ if(b.ram&&b.ram.cap<32&&b.cpu&&b.cpu.l>=1)a("Consider 32GB of RAM.","16GB is the floor for current games and leaves little room for multitasking on a "+LV[b.cpu.l]+" CPU.","ram");
+ if(b.cpu&&b.cool&&b.cpu.w>=120&&b.cool.l<2)a("This CPU would benefit from a stronger CPU cooler.","A "+b.cpu.w+"W CPU under a "+LV[b.cool.l]+" cooler can throttle under load, which lowers performance.","cool");
+ return u}
+
+function cs(p){var r=chk(Object.assign({},B,{[p.c]:p})).filter(function(x){return x.c.split(" ").indexOf(p.c)>=0}),
+ bad=r.filter(function(x){return x.s=="bad"})[0],w=r.filter(function(x){return x.s=="warn"})[0];
+ return bad?{s:"bad",t:bad.t}:w?{s:"warn",t:w.t}:r.length?{s:"ok",t:"Works with the parts you picked."}:{s:"na",t:"Pick other parts to check fit."}}
+
+function slots(){$("slots").innerHTML=CATS.map(function(c){return '<div class="slot"><label for="s-'+c+'"><b>'+T(CN[c])+'</b><small>'+T("Goes in")+': '+T(WH[c])+'</small></label><select id="s-'+c+'" data-s="'+c+'"><option value="">'+T("Choose…")+'</option>'+P.filter(function(p){return p.c==c}).map(function(p){return '<option value="'+p.id+'">'+p.b+' '+p.n+' — '+sar(p.p)+'</option>'}).join("")+'</select></div>'}).join("");
+ CATS.forEach(function(c){if(B[c])$("s-"+c).value=B[c].id})}
+
+function panel(){var ks=Object.keys(B),r=chk(B),t=0,l=0;ks.forEach(function(c){t+=B[c].p;l+=B[c].l});l=ks.length?Math.round(l/ks.length):0;
+ var w=(B.cpu?B.cpu.w:0)+(B.gpu?B.gpu.w:0)+(ks.length?100:0),
+ o=r.some(function(x){return x.s=="bad"})?"bad":r.some(function(x){return x.s=="warn"})?"warn":r.length?"ok":"na";
+ $("dia").innerHTML=dia(new Set(),new Set(ks),l,1);
+ $("ov").innerHTML=st(o,T(SL[o]));$("tot").textContent=sar(t);$("pw").textContent=w+" W";
+ $("checks").innerHTML=r.length?r.map(function(x){return '<li><div><b>'+x.k+'</b><small>'+x.t+'</small></div>'+st(x.s,T(SL[x.s]))+'</li>'}).join(""):'<li class="mu">'+T("Pick a CPU and a motherboard to start checking.")+'</li>';
+ var u=ups(B);
+ $("ups").innerHTML=!ks.length?'<li class="mu">'+T("Choose parts to see upgrade ideas.")+'</li>':u.length?u.map(function(x){return '<li><div><b>'+x.t+'</b><small>'+x.w+'</small></div><button class="btn sm ghost" data-go="'+x.c+'">'+T("Browse")+'</button></li>'}).join(""):'<li>Your build looks balanced. No upgrades needed right now.</li>'}
+
+function card(p){var c=cs(p);return '<article class="pc"><div class="th">'+dia(new Set([p.c]),new Set(),p.l)+'</div><div class="bd"><p class="tg"><span>'+p.b+'</span><span class="lv">'+T(LV[p.l])+'</span></p><h3><button class="lk" data-d="'+p.id+'">'+p.n+'</button></h3><small>'+T(CN[p.c])+'</small><dl class="sp">'+SP[p.c](p).slice(0,4).map(function(x){return '<div><dt>'+x[0]+'</dt><dd>'+x[1]+'</dd></div>'}).join("")+'</dl><p class="cp">'+st(c.s,T(SL[c.s]))+'<small>'+c.t+'</small></p><div class="pr">'+sar(p.p)+'</div><div class="ac"><button class="btn sm ghost" data-b="'+p.id+'">'+T("Add to Build")+'</button><button class="btn sm" data-c="'+p.id+'">'+T("Add to Cart")+'</button></div></div></article>'}
+function sg(p,s){var a=s.split("|");return [].concat(G[+a[0]][1](p)).indexOf(a[1])>=0}
+function renderShop(){var q=F.q.toLowerCase(),l=P.filter(function(p){return(!F.c||p.c==F.c)&&(!F.b||p.b==F.b)&&(F.l===""||p.l==F.l)&&p.p<=F.max&&(!q||(p.b+" "+p.n+" "+CN[p.c]).toLowerCase().indexOf(q)>=0)&&(!F.s||sg(p,F.s))&&(!F.fit||cs(p).s!="bad")});
+ $("count").textContent=l.length+" "+T("parts");$("grid").innerHTML=l.length?l.map(card).join(""):'<p>'+T("No parts match. Try removing a filter.")+'</p>'}
+function filt(){var mk=function(id,a){$(id).innerHTML=a.map(function(x){return '<option value="'+x[0]+'">'+x[1]+'</option>'}).join("")},al=[["",T("All")]];
+ mk("fc",al.concat(CATS.map(function(c){return[c,T(CN[c])]})));mk("fb",al.concat(BR.map(function(b){return[b,b]})));mk("fl",al.concat(LV.map(function(x,i){return[i,T(x)]})));
+ $("fs").innerHTML='<option value="">'+T("All")+'</option>'+G.map(function(g,i){var v=[].concat.apply([],P.map(g[1])).filter(function(x,j,a){return x&&a.indexOf(x)==j});return '<optgroup label="'+T(g[0])+'">'+v.map(function(x){return '<option value="'+i+'|'+x+'">'+x+'</option>'}).join("")+'</optgroup>'}).join("");
+ $("fq").placeholder=T("Search parts");$("fp").max=MAX;sync()}
+function sync(){$("fq").value=F.q;$("fc").value=F.c;$("fb").value=F.b;$("fl").value=F.l;$("fs").value=F.s;$("fp").value=F.max;$("fo").textContent=sar(+F.max);$("ff").checked=F.fit}
+function readF(){F={q:$("fq").value,c:$("fc").value,b:$("fb").value,l:$("fl").value,s:$("fs").value,max:+$("fp").value,fit:$("ff").checked};$("fo").textContent=sar(F.max);renderShop()}
+function goShop(o){F=Object.assign(F0(),o);sync();renderShop();$("shop").scrollIntoView()}
+
+function cats(){$("catGrid").innerHTML=CATS.map(function(c){var br=P.filter(function(p){return p.c==c}).map(function(p){return p.b}).filter(function(v,i,a){return a.indexOf(v)==i});return '<button class="cc" data-go2="'+c+'"><div class="th">'+dia(new Set([c]),new Set(),1)+'</div><b>'+T(CN[c])+'</b><small>'+br.join(", ")+'</small></button>'}).join("");
+ $("lvGrid").innerHTML=LV.map(function(x,i){return '<button class="cc" data-lv="'+i+'"><div class="th">'+dia(new Set(["gpu"]),new Set(),i)+'</div><b>'+T(x)+'</b><small>'+LD[i]+'</small></button>'}).join("")}
+function anat(){$("anChips").innerHTML=CATS.map(function(c){return '<button data-an="'+c+'" aria-pressed="'+(c==A)+'">'+T(CN[c])+'</button>'}).join("");
+ $("ad").innerHTML=dia(new Set([A]),new Set(),2,1);
+ $("at").innerHTML='<h3>'+T(CN[A])+'</h3><p>'+WHAT[A]+'</p><p><b>'+T("Where it goes")+':</b> '+T(WH[A])+'</p>'}
+
+function detail(id){var p=P[id],c=cs(p),rel=(REL[p.c]||[]).map(function(k){var m=P.filter(function(q){return q.c==k&&chk({[p.c]:p,[k]:q}).every(function(x){return x.s!="bad"})}).map(function(q){return q.b+" "+q.n});return '<p><b>'+T(CN[k])+':</b> '+(m.length?m.slice(0,6).join(", ")+(m.length>6?" +"+(m.length-6):""):"—")+'</p>'}).join("")||'<p>'+NT[p.c]+'</p>',
+ alt=P.filter(function(q){return q.c==p.c&&q.id!=id&&Math.abs(q.l-p.l)<=1}).slice(0,3);
+ $("dbody").innerHTML='<div class="dg"><div>'+dia(new Set([p.c]),new Set(),p.l,1)+'</div><div><p class="tg"><span>'+p.b+'</span><span class="lv">'+T(LV[p.l])+'</span></p><h2 id="dt">'+p.b+' '+p.n+'</h2><p>'+WHAT[p.c]+'</p><p class="cp">'+st(c.s,T(SL[c.s]))+'<small>'+c.t+'</small></p><div class="pr" style="margin:10px 0">'+sar(p.p)+'</div><div class="ac"><button class="btn" data-c="'+id+'">'+T("Add to Cart")+'</button><button class="btn ghost" data-b="'+id+'">'+T("Add to Build")+'</button></div></div></div>'
+ +'<h3>'+T("Specifications")+'</h3><dl class="sp big">'+SP[p.c](p).map(function(x){return '<div><dt>'+x[0]+'</dt><dd>'+x[1]+'</dd></div>'}).join("")+'</dl>'
+ +'<h3 style="margin-top:16px">'+T("Where it goes")+'</h3><p>'+T(WH[p.c])+'</p><h3>'+T("Compatible with")+'</h3>'+rel
+ +'<h3>'+T("Alternatives")+'</h3><div class="ac" style="margin-top:8px">'+alt.map(function(q){return '<button class="btn sm ghost" data-d="'+q.id+'">'+q.b+' '+q.n+'</button>'}).join("")+'</div>';
+ if(!$("dlg").open)$("dlg").showModal()}
+
+function cartR(){var ids=Object.keys(C),t=0,n=0;ids.forEach(function(i){t+=C[i]*P[i].p;n+=C[i]});
+ $("cn").textContent=n;
+ $("cl").innerHTML=ids.length?ids.map(function(i){var p=P[i];return '<li class="cl"><div><b>'+p.b+' '+p.n+'</b><small>'+sar(p.p)+'</small></div><div class="step"><button data-m="'+i+'" aria-label="Decrease quantity">−</button><span>'+C[i]+'</span><button data-a="'+i+'" aria-label="Increase quantity">+</button></div><b>'+sar(C[i]*p.p)+'</b><button class="rm" data-x="'+i+'">'+T("Remove")+'</button></li>'}).join(""):'<li class="mu">'+T("Your cart is empty.")+'</li>';
+ $("ct").textContent=sar(t);
+ $("mail").href="mailto:orders@tarkeeb.example?subject=Order&body="+encodeURIComponent(ids.map(function(i){return C[i]+" × "+P[i].b+" "+P[i].n+" ("+sar(C[i]*P[i].p)+")"}).join("\n")+"\n\nTotal: "+sar(t));
+ $("mail").setAttribute("aria-disabled",!n);$("cartBtn").setAttribute("aria-label",T("Cart")+", "+n)}
+
+function all(){document.querySelectorAll("[data-i]").forEach(function(e){e.dataset.o=e.dataset.o||e.textContent;e.textContent=T(e.dataset.o)});
+ $("heroArt").innerHTML=dia(new Set(),new Set(CATS),3,0);filt();slots();cats();anat();panel();renderShop();cartR()}
+
+document.addEventListener("click",function(e){var t=e.target.closest("button"),say=function(s){$("live").textContent=s};if(!t)return;var d=t.dataset;
+ if(d.d)detail(+d.d);
+ else if(d.b){var p=P[d.b];B[p.c]=p;$("s-"+p.c).value=p.id;panel();renderShop();say(T("Added to build")+": "+p.n)}
+ else if(d.c){C[d.c]=(C[d.c]||0)+1;cartR();say(T("Added to cart")+": "+P[d.c].n)}
+ else if(d.m){C[d.m]--;if(!C[d.m])delete C[d.m];cartR()}
+ else if(d.a){C[d.a]++;cartR()}
+ else if(d.x){delete C[d.x];cartR()}
+ else if(d.go){$("dlg").close();goShop({c:d.go,fit:true})}
+ else if(d.go2){goShop({c:d.go2})}
+ else if(d.lv){goShop({l:d.lv})}
+ else if(d.an){A=d.an;anat()}});
+document.addEventListener("change",function(e){var s=e.target,c=s.dataset&&s.dataset.s;if(c){s.value===""?delete B[c]:B[c]=P[s.value];panel();renderShop()}});
+$("filters").addEventListener("input",readF);
+$("cartBtn").onclick=function(){$("cart").showModal()};
+$("cx").onclick=function(){$("cart").close()};$("dx").onclick=function(){$("dlg").close()};
+["dlg","cart"].forEach(function(i){$(i).addEventListener("click",function(e){if(e.target==$(i))$(i).close()})});
+$("addAll").onclick=function(){var ks=Object.keys(B);ks.forEach(function(c){C[B[c].id]=(C[B[c].id]||0)+1});cartR();$("live").textContent=T("Added to cart")+": "+ks.length};
+$("lg").onclick=function(){lang=lang=="en"?"ar":"en";$("lg").textContent=lang=="en"?"العربية":"English";$("lg").lang=lang=="en"?"ar":"en";var h=document.documentElement;h.lang=lang;h.dir=lang=="ar"?"rtl":"ltr";all()};
+all();
+</script>
+</body>
+</html>
