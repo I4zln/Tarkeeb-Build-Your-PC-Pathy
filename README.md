@@ -4,6 +4,8 @@
 
 **A PC hardware platform that helps you understand every part and build a computer that works together.**
 
+<a href="https://raw.githack.com/I4zln/Tarkeeb-Build-Your-PC-Pathy/main/Tarkeeb%20%E2%80%94%20Build%20your%20PC.html"><img src="https://img.shields.io/badge/Live_Demo-Try_Tarkeeb-a8d5ad?style=for-the-badge&logo=googlechrome&logoColor=black" alt="Live demo" /></a>
+
 <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white" alt="HTML5" />
 <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white" alt="CSS3" />
 <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black" alt="JavaScript" />
@@ -12,7 +14,7 @@
 
 <br /><br />
 
-<img src="screenshots/hero.png" width="100%" alt="Tarkeeb home page" />
+<a href="https://raw.githack.com/I4zln/Tarkeeb-Build-Your-PC-Pathy/main/Tarkeeb%20%E2%80%94%20Build%20your%20PC.html"><img src="screenshots/hero.png" width="100%" alt="Tarkeeb home page" /></a>
 
 [English](#english) · [العربية](#arabic)
 
@@ -51,7 +53,7 @@ I built it in the **AI Development Program (Pathy × IBM eyouth)**, exploring ho
 
 ## Run it
 
-No installation and no build step. Download the repository and open **`Tarkeeb — Build your PC.html`** in any modern browser.
+Try it online with the **[live demo](https://raw.githack.com/I4zln/Tarkeeb-Build-Your-PC-Pathy/main/Tarkeeb%20%E2%80%94%20Build%20your%20PC.html)**, or download the repository and open **`Tarkeeb — Build your PC.html`** in any modern browser. No installation and no build step.
 
 ## Author
 
@@ -82,7 +84,7 @@ No installation and no build step. Download the repository and open **`Tarkeeb �
 
 ## التشغيل
 
-لا يحتاج تثبيتًا. نزّل المستودع وافتح الملف **`Tarkeeb — Build your PC.html`** في أي متصفح حديث.
+جرّبه مباشرة من **[الرابط](https://raw.githack.com/I4zln/Tarkeeb-Build-Your-PC-Pathy/main/Tarkeeb%20%E2%80%94%20Build%20your%20PC.html)**، أو نزّل المستودع وافتح الملف **`Tarkeeb — Build your PC.html`** في أي متصفح حديث، دون أي تثبيت.
 
 ## صاحب المشروع
 
